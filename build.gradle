@@ -1,0 +1,63 @@
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'eclipse'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.1'
+    }
+}
+apply plugin: 'com.bmuschko.tomcat'
+
+def scalaMajor='2.11'
+def scalaVersion='2.11.8'
+def scalatraVersion='2.4.0'
+
+configurations {
+    provided
+}
+ 
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+eclipse.classpath.plusConfigurations += [configurations.provided]
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def tomcatVersion = '7.0.61'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+
+    compile "org.scala-lang:scala-library:$scalaVersion"
+    compile "org.scala-lang:scala-compiler:$scalaVersion"
+    compile "org.scalatra:scalatra_$scalaMajor:$scalatraVersion"
+    compile "org.scalatra:scalatra-json_$scalaMajor:$scalatraVersion"
+    compile "org.scalatra:scalatra-auth_$scalaMajor:$scalatraVersion"
+    compile "org.json4s:json4s-jackson_$scalaMajor:3.3.0"
+    testCompile "junit:junit:4.11"
+    testCompile "org.specs2:specs2-junit_$scalaMajor:3.6.6"
+    testCompile "org.scalatra:scalatra-specs2_$scalaMajor:$scalatraVersion"
+    provided 'javax.servlet:javax.servlet-api:3.1.0'
+}
+
+test{
+	systemProperties System.getProperties()
+	testLogging {
+        events "passed", "skipped", "failed", "standardError", "standardOut"
+    }
+}
+
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.additionalParameters = ['-target:jvm-1.6']
+}
