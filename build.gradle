@@ -26,7 +26,7 @@ sourceSets {
     test.runtimeClasspath += configurations.provided
 }
 eclipse.classpath.plusConfigurations += [configurations.provided]
-
+sourceSets.main.output.classesDir = file('webapp/WEB-INF/classes')
 
 repositories {
     mavenCentral()
@@ -50,6 +50,8 @@ dependencies {
     provided 'javax.servlet:javax.servlet-api:3.1.0'
 }
 
+
+
 test{
 	systemProperties System.getProperties()
 	testLogging {
@@ -58,6 +60,8 @@ test{
 }
 
 
+
 tasks.withType(ScalaCompile) {
     scalaCompileOptions.additionalParameters = ['-target:jvm-1.6']
 }
+
