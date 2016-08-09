@@ -11,9 +11,4 @@ class PingServlet extends BaseServlet{
   get("/"){
     "ping"
   }
-
-  get("/pong"){
-    "pong"
-  }
-
 }

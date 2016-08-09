@@ -24,9 +24,11 @@ sourceSets {
     main.compileClasspath += configurations.provided
     test.compileClasspath += configurations.provided
     test.runtimeClasspath += configurations.provided
+
+    main.output.classesDir = file('src/main/webapp/WEB-INF/classes')
 }
 eclipse.classpath.plusConfigurations += [configurations.provided]
-sourceSets.main.output.classesDir = file('webapp/WEB-INF/classes')
+
 
 repositories {
     mavenCentral()
