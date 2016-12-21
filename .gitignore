@@ -14,5 +14,4 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 .idea/
-.idea/libraries/
 src/main/webapp/WEB-INF/classes/
