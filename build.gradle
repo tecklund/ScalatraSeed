@@ -1,17 +1,23 @@
-apply plugin: 'java'
-apply plugin: 'scala'
-apply plugin: 'eclipse'
-
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'org.akhikhl.gretty:gretty:+'
+        classpath 'com.h2database:h2:1.4.191'
     }
 }
+
+plugins {
+    id "org.flywaydb.flyway" version "4.1.2"
+}
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'eclipse'
 apply plugin: 'war'
 apply plugin: 'org.akhikhl.gretty'
+
 
 def scalaMajor='2.11'
 def scalaVersion='2.11.8'
@@ -42,10 +48,26 @@ dependencies {
     compile "org.scalatra:scalatra-json_$scalaMajor:$scalatraVersion"
     compile "org.scalatra:scalatra-auth_$scalaMajor:$scalatraVersion"
     compile "org.json4s:json4s-jackson_$scalaMajor:3.3.0"
+    compile "org.blinkmob:scala-tx-provider:1.0.0"
+    
+    // https://mvnrepository.com/artifact/com.zaxxer/HikariCP-java7
+	compile group: 'com.zaxxer', name: 'HikariCP-java7', version: '2.4.11'
+    // https://mvnrepository.com/artifact/com.h2database/h2
+	compile group: 'com.h2database', name: 'h2', version: '1.4.194'
+    // https://mvnrepository.com/artifact/com.typesafe.play/anorm_2.11
+	compile group: 'com.typesafe.play', name: 'anorm_2.11', version: '2.5.0'
+    
+    
+    
     testCompile "junit:junit:4.11"
     testCompile "org.specs2:specs2-junit_$scalaMajor:3.6.6"
     testCompile "org.scalatra:scalatra-specs2_$scalaMajor:$scalatraVersion"
     provided 'javax.servlet:javax.servlet-api:3.1.0'
+}
+
+flyway {
+    url = 'jdbc:h2:file:./target/foobar'
+    user = 'sa'
 }
 
 
@@ -57,9 +79,11 @@ test {
     testLogging.showStandardStreams = true
 }
 
-
-
-tasks.withType(ScalaCompile) {
-    scalaCompileOptions.additionalParameters = ['-target:jvm-1.6']
+task repl(type:JavaExec) {
+	systemProperties System.properties
+    main = "scala.tools.nsc.MainGenericRunner"
+    classpath = sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
+    standardInput System.in
+    args '-usejavacp'
 }
 

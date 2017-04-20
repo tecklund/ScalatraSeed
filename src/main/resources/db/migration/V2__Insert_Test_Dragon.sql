@@ -1,0 +1,1 @@
+insert into DRAGON (ID, DRAGON_TYPE, NAME) values (1, 'BLUE', 'Saphira');
