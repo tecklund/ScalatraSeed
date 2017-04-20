@@ -25,6 +25,9 @@ def scalatraVersion='2.4.1'
 
 configurations {
     provided
+    grettyRunnerTomcat8 {
+    	exclude group: 'org.slf4j', module: 'log4j-over-slf4j'
+  	}
 }
  
 sourceSets {
@@ -74,9 +77,15 @@ flyway {
     user = 'sa'
 }
 
+gretty{
+	servletContainer 'tomcat8'
+}
+
 import org.akhikhl.gretty.AppStartTask
 task('mAppRun', type: AppStartTask, dependsOn:'prepareInplaceWebApp') {}
 mAppRun.dependsOn flywayMigrate
+
+
 
 test {
     doFirst {
