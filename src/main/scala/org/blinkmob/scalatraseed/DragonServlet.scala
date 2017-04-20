@@ -9,7 +9,8 @@ class DragonServlet extends BaseServlet{
 
   get("/"){
     DB.tx{implicit c =>
-      SQL"""select ID, DRAGON_TYPE, NAME from DRAGON""".as(Macro.namedParser[Dragon].*)
+      SQL"""select ID, DRAGON_TYPE, NAME from DRAGON"""
+        .as(Macro.namedParser[Dragon].*)
     }
   }
   
