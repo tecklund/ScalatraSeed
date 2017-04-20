@@ -56,6 +56,8 @@ dependencies {
 	compile group: 'com.h2database', name: 'h2', version: '1.4.194'
     // https://mvnrepository.com/artifact/com.typesafe.play/anorm_2.11
 	compile group: 'com.typesafe.play', name: 'anorm_2.11', version: '2.5.0'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
     
     
     
@@ -70,7 +72,9 @@ flyway {
     user = 'sa'
 }
 
-
+import org.akhikhl.gretty.AppStartTask
+task('mAppRun', type: AppStartTask, dependsOn:'prepareInplaceWebApp') {}
+mAppRun.dependsOn flywayMigrate
 
 test {
     doFirst {
