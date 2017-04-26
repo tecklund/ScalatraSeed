@@ -51,11 +51,11 @@ dependencies {
     compile "org.scalatra:scalatra-json_$scalaMajor:$scalatraVersion"
     compile "org.scalatra:scalatra-auth_$scalaMajor:$scalatraVersion"
     compile "org.json4s:json4s-jackson_$scalaMajor:3.3.0"
-    compile "org.blinkmob:scala-tx-provider:1.0.0"
+    compile "org.blinkmob:scala-tx-provider_2.11:1.0.1"
     
     compile group: 'com.zaxxer', name: 'HikariCP-java7', version: '2.4.11'
     compile group: 'com.h2database', name: 'h2', version: '1.4.194'
-    compile group: 'com.typesafe.play', name: 'anorm_2.11', version: '2.5.0'
+    compile group: 'com.typesafe.play', name: 'anorm_2.11', version: '2.5.3'
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
     
     
