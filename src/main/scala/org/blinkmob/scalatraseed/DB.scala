@@ -7,6 +7,7 @@ import com.zaxxer.hikari.HikariConfig
 import scala.util.Properties
 import com.typesafe.config.ConfigFactory
 import org.blinkmob.scalatraseed.utils.Logging
+import java.sql.Connection
 
 
 object DB extends CxProvider with hasDataSource with Logging{
@@ -27,3 +28,20 @@ object DB extends CxProvider with hasDataSource with Logging{
   
   val ds = new HikariDataSource(config)  
 }
+
+abstract class DBW{
+  def run[A](block: Connection => A):A
+}
+
+class TXDBW extends DBW{
+  override def run[A](block: Connection => A):A = {
+    DB.tx { block }
+  }
+}
+
+class RBTXDBW extends DBW{
+  override def run[A](block: Connection => A):A = {
+    DB.rbtx { block }
+  }
+}
+
