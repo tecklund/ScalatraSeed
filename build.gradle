@@ -39,7 +39,7 @@ sourceSets {
 eclipse.classpath.plusConfigurations += [configurations.provided]
 
 
-def env_ = project.hasProperty("env") ? env : "local"
+def env_ = System.hasProperty("env") ? System.properties["env"] : "local"
 
 def dbUrl = System.properties["${env_}.blinkmob.dbUrl"]
 def dbUser =  System.properties["${env_}.blinkmob.dbUser"]
@@ -90,7 +90,6 @@ import org.akhikhl.gretty.AppStartTask
 task('mAppRun', type: AppStartTask, dependsOn:'prepareInplaceWebApp') {
 	doFirst {
         systemProperties = System.getProperties()
-        System.setProperty("env", env)
     }
 }
 //mAppRun.dependsOn flywayMigrate

@@ -14,6 +14,8 @@ object DB extends CxProvider with hasDataSource with Logging{
   val conf = ConfigFactory.load()
   val env = conf.getString("env")
   
+  logger.error(s"ENV IS $env")
+  
   val dbUrl = conf.getString(s"${env}.dbUrl")
   val dbUsername = conf.getString(s"${env}.dbUser")
   val dbPassword = conf.getString(s"${env}.dbPassword")
