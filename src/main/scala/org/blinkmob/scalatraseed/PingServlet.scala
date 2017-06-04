@@ -1,6 +1,6 @@
-package com.smartrac.scalatraseed
+package org.blinkmob.scalatraseed
 
-import com.smartrac.scalatraseed.utils.{BaseServlet, Json, Logging}
+import org.blinkmob.scalatraseed.utils.{BaseServlet, Json, Logging}
 import org.scalatra.ScalatraServlet
 
 /**
