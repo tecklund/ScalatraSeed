@@ -16,7 +16,7 @@ class DragonServletTest extends ScalatraSpec {
       gets you some sweet dragons $getDragons
   """
       
-  addServlet(new DragonServlet, "/dragon")
+  addServlet(new DragonServlet(new RBTXDBW), "/dragon")
   
   def getDragons = get("/dragon"){
     val resp = read[List[Dragon]](response.body)
