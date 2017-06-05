@@ -39,7 +39,7 @@ sourceSets {
 eclipse.classpath.plusConfigurations += [configurations.provided]
 
 
-def env_ = System.hasProperty("env") ? System.properties["env"] : "local"
+def env_ = System.getProperty("env", "local")
 
 def dbUrl = System.properties["${env_}.blinkmob.dbUrl"]
 def dbUser =  System.properties["${env_}.blinkmob.dbUser"]
