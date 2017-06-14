@@ -6,20 +6,36 @@ import org.specs2.runner.JUnitRunner
 import org.json4s.jackson.Serialization._
 import org.json4s.DefaultFormats
 import org.json4s.Formats
+import org.blinkmob.models.Dragon
+import org.specs2.specification.ForEach
+import org.specs2.execute.AsResult
+import org.specs2.execute.Result
+import java.sql.Connection
+import org.scalatra.test.specs2.MutableScalatraSpec
 
 @RunWith(classOf[JUnitRunner])
-class DragonServletTest extends ScalatraSpec {
+class DragonServletTest extends MutableScalatraSpec {
   implicit val jsonFormats: Formats = DefaultFormats
   
-  def is = s2"""
-    GET /dragon
-      gets you some sweet dragons $getDragons
-  """
       
-  addServlet(new DragonServlet(new RBTXDBW), "/dragon")
+  addServlet(new DragonServlet, "/dragon")
   
-  def getDragons = get("/dragon"){
-    val resp = read[List[Dragon]](response.body)
-    resp must contain(Dragon(1, "BLUE", "Saphira"), Dragon(2, "GREEN", "Puff"))
+  "GET / on HelloWorldServlet" should {
+    "return status 200" in {
+      get("/dragon"){
+        val resp = read[List[Dragon]](response.body)
+        resp must contain(Dragon(1, "BLUE", "Saphira"), Dragon(2, "GREEN", "Puff"))
+      }
+    }
+  }
+  
+}
+
+
+
+trait DatabaseContext extends ForEach[Connection] {
+  // you need to define the "foreach" method
+  def foreach[R: AsResult](f: Connection => R): Result = {
+    DB.rbtx { c => AsResult(f(c)) }
   }
 }

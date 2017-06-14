@@ -80,6 +80,7 @@ flyway {
     url = dbUrl
     user = dbUser
     password = dbPassword
+    schemas = ['PUBLIC']
 }
 
 gretty{
