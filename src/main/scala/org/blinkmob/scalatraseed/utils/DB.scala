@@ -5,7 +5,7 @@ import org.blinkmob.hasDataSource
 import com.zaxxer.hikari.HikariDataSource
 import com.zaxxer.hikari.HikariConfig
 import com.typesafe.config.ConfigFactory
-import org.blinkmob.scalatraseed.utils.Logging
+
 
 
 object DB extends CxProvider with hasDataSource with Logging{
@@ -25,7 +25,7 @@ object DB extends CxProvider with hasDataSource with Logging{
   config.setJdbcUrl(dbUrl)
   config.setUsername(dbUsername)
   config.setPassword(dbPassword)
-  config.setDriverClassName("com.mysql.jdbc.Driver")
+  config.setDriverClassName("com.mysql.cj.jdbc.Driver")
   
   val ds = new HikariDataSource(config)  
 }
