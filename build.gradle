@@ -39,11 +39,10 @@ sourceSets {
 eclipse.classpath.plusConfigurations += [configurations.provided]
 
 
-def env_ = System.getProperty("env", "local")
+def dbUrl = System.properties["dbUrl"]
+def dbUser =  System.properties["flyway.dbUser"]
+def dbPassword = System.properties["flyway.dbPassword"]
 
-def dbUrl = System.properties["${env_}.blinkmob.dbUrl"]
-def dbUser =  System.properties["${env_}.blinkmob.dbUser"]
-def dbPassword = System.properties["${env_}.blinkmob.dbPassword"]
 
 
 repositories {
@@ -80,8 +79,6 @@ dependencies {
 
 flyway {
     url = dbUrl
-    user = dbUser
-    password = dbPassword
     schemas = ['PUBLIC']
 }
 
@@ -99,6 +96,7 @@ mAppRun.dependsOn flywayMigrate
 
 war {
     archiveName 'dragons.war'
+    rootSpec.exclude('**/migration/**')
 }
 
 test {

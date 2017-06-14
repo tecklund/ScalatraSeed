@@ -11,13 +11,10 @@ import com.typesafe.config.ConfigFactory
 object DB extends CxProvider with hasDataSource with Logging{
   
   val conf = ConfigFactory.load()
-  val env = conf.getString("env")
   
-  logger.error(s"env is $env")
-  
-  val dbUrl = conf.getString(s"${env}.dbUrl")
-  val dbUsername = conf.getString(s"${env}.dbUser")
-  val dbPassword = conf.getString(s"${env}.dbPassword")
+  val dbUrl = conf.getString(s"dbUrl")
+  val dbUsername = conf.getString(s"dbUser")
+  val dbPassword = conf.getString(s"dbPassword")
   
   logger.error(s"dbUrl is $dbUrl")
   
