@@ -1,13 +1,11 @@
-package org.blinkmob.scalatraseed
+package org.blinkmob.scalatraseed.utils
 
 import org.blinkmob.CxProvider
 import org.blinkmob.hasDataSource
 import com.zaxxer.hikari.HikariDataSource
 import com.zaxxer.hikari.HikariConfig
-import scala.util.Properties
 import com.typesafe.config.ConfigFactory
 import org.blinkmob.scalatraseed.utils.Logging
-import java.sql.Connection
 
 
 object DB extends CxProvider with hasDataSource with Logging{

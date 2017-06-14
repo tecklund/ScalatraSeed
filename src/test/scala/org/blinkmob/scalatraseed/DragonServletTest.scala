@@ -12,6 +12,7 @@ import org.specs2.execute.AsResult
 import org.specs2.execute.Result
 import java.sql.Connection
 import org.scalatra.test.specs2.MutableScalatraSpec
+import org.blinkmob.scalatraseed.utils.DB
 
 @RunWith(classOf[JUnitRunner])
 class DragonServletTest extends MutableScalatraSpec {
