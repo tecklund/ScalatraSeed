@@ -5,6 +5,7 @@ import org.blinkmob.hasDataSource
 import com.zaxxer.hikari.HikariDataSource
 import com.zaxxer.hikari.HikariConfig
 import com.typesafe.config.ConfigFactory
+//import net.sf.log4jdbc.sql.jdbcapi.DataSourceSpy
 
 
 object DB extends CxProvider with hasDataSource with Logging{
@@ -21,6 +22,7 @@ object DB extends CxProvider with hasDataSource with Logging{
   config.setJdbcUrl(dbUrl)
   config.setUsername(dbUsername)
   config.setPassword(dbPassword)
+  config.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy")
   
   
   val ds = new HikariDataSource(config)  
