@@ -7,7 +7,6 @@ import com.zaxxer.hikari.HikariConfig
 import com.typesafe.config.ConfigFactory
 
 
-
 object DB extends CxProvider with hasDataSource with Logging{
   
   val conf = ConfigFactory.load()
@@ -22,7 +21,7 @@ object DB extends CxProvider with hasDataSource with Logging{
   config.setJdbcUrl(dbUrl)
   config.setUsername(dbUsername)
   config.setPassword(dbPassword)
-  config.setDriverClassName("com.mysql.cj.jdbc.Driver")
+  
   
   val ds = new HikariDataSource(config)  
 }
