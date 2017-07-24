@@ -22,7 +22,7 @@ object DB extends CxProvider with hasDataSource with Logging{
   config.setJdbcUrl(dbUrl)
   config.setUsername(dbUsername)
   config.setPassword(dbPassword)
-  config.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy")
+//  config.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy")
   
   
   val ds = new HikariDataSource(config)  
