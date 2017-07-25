@@ -10,6 +10,7 @@ buildscript {
 
 plugins {
     id "org.flywaydb.flyway" version "4.1.2"
+  	id "org.blinkmob.flywayrename" version "1.0.0"
 }
 
 apply plugin: 'java'
