@@ -39,6 +39,7 @@ sourceSets {
 }
 eclipse.classpath.plusConfigurations += [configurations.provided]
 
+flywayMigrate.dependsOn flywayRename
 
 def dbUrl = System.properties["dbUrl"]
 def dbUser =  System.properties["flyway.dbUser"]
