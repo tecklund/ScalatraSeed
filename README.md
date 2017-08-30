@@ -22,6 +22,6 @@ This seed is equipped with easy environment switching. These system properties a
 There is also a Docker file. To create and run a docker image perform these steps:
 1. `gradle war`
 2. `docker build .`
-3. `docker run -it -p8080:8080 -eENV=qa -eDBUSER=root <container id>`
+3. `docker run -it -p8080:8080 -eDBURL=<jbdc url> -eDBUSER=root -eDBPASSWORD=password <container id>`
 
 Check out the `setenv.sh` file to see what environment variables you can pass in to your docker container.
