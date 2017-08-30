@@ -11,7 +11,13 @@ Try it out with `http://localhost:8080/ScalatraSeed/dragons`
 
 You can also run the test suite with `./test.sh`. This will execute both 'unit' tests against the models and 'integration' tests against the HTTP endpoints.
 
-This seed is equipped with easy environment switching. The environment defaults to 'local', with the database defaults stored in gradle.properties. You can override these properties by simply setting the system params like this `gradle -Denv=qa mapprun`
+This seed is equipped with easy environment switching. These system properties are configurable:
+1. dbUrl - jdbc string your application will use to connect to your database
+2. dbUser - username your application will use to connect to the database
+3. dbPassword - password your appliaction will use to connect to the database
+4. flyway.url - jdbc string that flyway will use during migrations
+5. flyway.user - username for flyway
+6. flyway.password - password for flyway
 
 There is also a Docker file. To create and run a docker image perform these steps:
 1. `gradle war`
