@@ -11,9 +11,7 @@ class DragonServlet extends BaseServlet{
   get("/"){
     logger.info("getting some dragons...")
     DB.tx{implicit c:Connection =>
-       val dragons = Dragon.getAll()
-       dragons.foreach(d => logger.error(d.TS.toString()))
-       dragons
+       Dragon.getAll()
     }
   }
   

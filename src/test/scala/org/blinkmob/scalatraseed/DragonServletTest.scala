@@ -13,11 +13,15 @@ import org.specs2.execute.Result
 import java.sql.Connection
 import org.scalatra.test.specs2.MutableScalatraSpec
 import org.blinkmob.scalatraseed.utils.DB
+import org.specs2.matcher.MatchResult
+import org.json4s.ext.JavaTimeSerializers
 
 @RunWith(classOf[JUnitRunner])
 class DragonServletTest extends MutableScalatraSpec {
-  implicit val jsonFormats: Formats = DefaultFormats
+  implicit val jsonFormats: Formats = DefaultFormats ++ JavaTimeSerializers.all
   
+  def D1:PartialFunction[Dragon, MatchResult[_]] = {case Dragon(1, "BLUE", "Saphira", _) => ok}
+  def D2:PartialFunction[Dragon, MatchResult[_]] = {case Dragon(2, "GREEN", "Puff", _) => ok}
       
   addServlet(new DragonServlet, "/dragon")
   
@@ -25,7 +29,7 @@ class DragonServletTest extends MutableScalatraSpec {
     "return status 200" in {
       get("/dragon"){
         val resp = read[List[Dragon]](response.body)
-        resp must contain(Dragon(1, "BLUE", "Saphira"), Dragon(2, "GREEN", "Puff"))
+        resp must contain(exactly(beLike(D1), beLike(D2)))
       }
     }
   }
