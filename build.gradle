@@ -58,7 +58,8 @@ dependencies {
     compile "org.scalatra:scalatra_$scalaMajor:$scalatraVersion"
     compile "org.scalatra:scalatra-json_$scalaMajor:$scalatraVersion"
     compile "org.scalatra:scalatra-auth_$scalaMajor:$scalatraVersion"
-    compile "org.json4s:json4s-jackson_$scalaMajor:3.3.0"
+    compile "org.json4s:json4s-jackson_$scalaMajor:3.6.0-M1"
+    compile "org.json4s:json4s-ext_$scalaMajor:3.6.0-M1"
     compile "org.blinkmob:scala-tx-provider_$scalaMajor:1.0.1"
     compile "com.typesafe:config:1.3.1"
     
