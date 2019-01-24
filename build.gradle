@@ -9,7 +9,7 @@ buildscript {
 }
 
 plugins {
-    id "org.flywaydb.flyway" version "4.1.2"
+    id "org.flywaydb.flyway" version "5.2.4"
   	id "org.blinkmob.flywayrename" version "1.0.0"
 }
 
